@@ -1,13 +1,18 @@
 const express = require('express');
-const router = express.Router();
 const nodemailer = require('nodemailer');
-const MailList = require('../models/MailList');
 const { body, validationResult } = require('express-validator');
+
+const MailList = require('../models/MailList');
+const blogController = require('../controllers/blogController')
+
+const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.status(200).json({ message: 'Not implemented yet' });
 });
+
+router.post('/createBlog', blogController.post_blog)
 
 router.post('/newsletter',[
 
