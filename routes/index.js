@@ -8,9 +8,7 @@ const blogController = require('../controllers/blogController')
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.status(200).json({ message: 'Not implemented yet' });
-});
+router.get('/', blogController.get_blogs);
 
 router.post('/createBlog', blogController.post_blog)
 
