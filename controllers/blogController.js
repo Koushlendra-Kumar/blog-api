@@ -3,7 +3,13 @@ const { body, validationResult } = require('express-validator');
 const BlogModel = require('../models/Blog');
 
 exports.get_blogs = (req, res, next) => {
-    res.status(200).json({msg: 'Not implemented yet!'})
+    BlogModel.find({}, function(err, docs) {
+        if(err) {
+            res.status(500).json({msg: 'Error finding Blogs!!'})
+        } else {
+            res.status(200).json({msg: 'All blogs', docs})
+        }
+    })
 }
 
 exports.post_blog = [
