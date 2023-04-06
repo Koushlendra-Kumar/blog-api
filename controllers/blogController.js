@@ -37,7 +37,12 @@ exports.post_blog = [
 }]
 
 exports.delete_blog = (req, res, next) => {
-    res.status(200).json({msg: 'Not implemented yet!'})
+    BlogModel.findByIdAndDelete(req.params.id).exec(function(err, docs){
+        if(err) {
+            res.status(500).json({msg: 'Error deleting this blog!!'})
+        }
+        res.status(200).json({msg: 'Blog deleted successfully.'})
+    }) 
 }
 
 exports.update_blog = (req, res, next) => {
