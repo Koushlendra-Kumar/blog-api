@@ -45,6 +45,27 @@ exports.delete_blog = (req, res, next) => {
     }) 
 }
 
-exports.update_blog = (req, res, next) => {
+exports.update_blog = [
+    body('title', 'Title is required').trim().isLength({ min: 1 }).escape(),
+    body('content', 'Content must be of length 20').trim().isLength({ min: 1 }).escape(),
+
+    (req, res, next) => {
+        const errors = validationResult(req);
+        let update = {
+            title: req.body.title,
+            content: req.body.content
+        }
+        if(errors.isEmpty()){
+           BlogModel.findByIdAndUpdate(req.params.id, update).exec(function(err, docs) {
+                if(err){
+                    res.status(500).json({msg: 'Error update blog in database!', err})
+                } else {
+                    res.status(200).json({msg: 'Blog updated successfully.'})
+                }
+            }) 
+        } else {
+            res.status(500).json({msg: 'Error validating input', err: errors.array()})
+        }
+        
     res.status(200).json({msg: 'Not implemented yet!'})
-}
+}]
