@@ -66,6 +66,4 @@ exports.update_blog = [
         } else {
             res.status(500).json({msg: 'Error validating input', err: errors.array()})
         }
-        
-    res.status(200).json({msg: 'Not implemented yet!'})
 }]
