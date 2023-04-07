@@ -13,6 +13,9 @@ router.get('/', blogController.get_blogs);
 router.post('/createBlog', blogController.post_blog)
 
 router.delete('/delete/:id', blogController.delete_blog);
+
+router.put('/update/:id', blogController.update_blog);
+
 router.post('/newsletter',[
 
   body('email','Email is required').trim().isLength({min: 1}).escape(),
