@@ -8,4 +8,6 @@ router.post('/signup', userController.post_singup);
 /* POST Login */
 router.post('/', userController.post_login);
 
+router.post('/forgot-password', userController.post_forgot_password);
+
 module.exports = router;
