@@ -1,6 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const { body, validationResult } = require('express-validator');
+const passport = require('passport');
 
 const MailList = require('../models/MailList');
 const blogController = require('../controllers/blogController')
@@ -10,11 +11,11 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', blogController.get_blogs);
 
-router.post('/createBlog', blogController.post_blog)
+router.post('/createBlog', passport.authenticate('jwt', {session: false}),blogController.post_blog)
 
-router.delete('/delete/:id', blogController.delete_blog);
+router.delete('/delete/:id', passport.authenticate('jwt', {session: false}), blogController.delete_blog);
 
-router.put('/update/:id', blogController.update_blog);
+router.put('/update/:id', passport.authenticate('jwt', {session: false}), blogController.update_blog);
 
 router.post('/newsletter',[
 
