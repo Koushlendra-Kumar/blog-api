@@ -1,12 +1,15 @@
 const express = require('express');
-const router = express.Router();
+const passport = require('passport');
+
 const userController = require('../controllers/userController');
 
+const router = express.Router();
+
 /* POST Sign Up. */
-router.post('/signup', userController.post_singup);
+router.post('/signup',passport.authenticate('signup', {session: false}), userController.post_singup);
 
 /* POST Login */
-router.post('/', userController.post_login);
+router.post('/login', userController.post_login);
 
 router.post('/forgot-password', userController.post_forgot_password);
 
